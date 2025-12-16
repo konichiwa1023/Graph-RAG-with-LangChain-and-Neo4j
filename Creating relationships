@@ -1,0 +1,13 @@
+from langchain_neo4j.graphs.graph_document import Relationship
+
+relationships = []
+
+for author in [jesus, jim]:
+  	# Create a Relationship between book and each author
+    relationships.append(Relationship(
+    source=book, 
+    target=author, 
+    type="WRITTEN_BY"
+   ))
+
+visualize_graph([book, jesus, jim], relationships)
