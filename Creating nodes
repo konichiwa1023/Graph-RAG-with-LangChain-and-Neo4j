@@ -1,0 +1,11 @@
+from langchain_neo4j.graphs.graph_document import Node
+
+# Create a Book node with a unique identifier
+book = Node(
+    type="Book",
+    id="building-knowledge-graphs",
+    properties={"title": "Building Knowledge Graphs"}
+)
+
+print(book.id, book.type, book.properties['title'])
+visualize_node(book)
