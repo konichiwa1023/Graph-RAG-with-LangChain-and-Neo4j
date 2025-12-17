@@ -1,0 +1,8 @@
+cypher = """MATCH (p:Person {name: $name})-[:WORKS_FOR]->(c:Company)
+RETURN c.name AS company"""
+
+# Execute the Cypher statement
+result = graph.query(cypher, {"name": "Jo Cornelissen"})
+# Extract the company 
+for row in result:
+    print(row['company'])
