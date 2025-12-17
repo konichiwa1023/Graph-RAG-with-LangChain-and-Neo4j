@@ -1,0 +1,12 @@
+# Connect to the Neo4j Database
+graph = Neo4jGraph(url=NEO4J_URL, username=NEO4J_USERNAME, password=NEO4J_PASSWORD)
+# Define the collection of graph documents
+graph_document = GraphDocument(
+    nodes=[book, jesus, jim], 
+    relationships=[written_by_jesus, written_by_jim]
+)
+
+# Save the data to your graph
+graph.add_graph_documents([graph_document])
+graph.refresh_schema()
+print(graph.schema)
