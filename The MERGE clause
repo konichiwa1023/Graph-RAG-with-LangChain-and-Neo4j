@@ -1,0 +1,15 @@
+# Modify the your Cypher statement
+cypher = """
+MERGE (p:Person {name: $name})
+MERGE (c:Course {title: $title})
+MERGE (p)-[:ENROLLED_IN]->(c)
+RETURN p.name AS name
+"""
+
+# Add your name to the query
+result = graph.query(cypher, 
+  {"name": "____", "title": "Graph RAG with LangChain and Neo4j"}
+)
+
+for record in result:
+    print(record['name'])
