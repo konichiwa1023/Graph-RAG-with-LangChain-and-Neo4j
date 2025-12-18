@@ -1,0 +1,15 @@
+prompt = ChatPromptTemplate.from_messages([
+    SystemMessagePromptTemplate.from_template(""" 
+		You are an expert Neo4j developer. Use the following database schema to write a Cypher statement to answer the user's question. Only generate the Cypher statement, no pre-amble. Do not return any Markdown.
+	Schema: 
+    {schema}
+    
+	Question: {question}""", 
+	# Update the partial_variables dictionary
+    partial_variables={"schema": graph.schema})
+])
+
+# Create the text-to-Cypher chain
+text_to_cypher_chain = prompt | llm | StrOutputParser()
+cypher = text_to_cypher_chain.invoke({"question": "Where does Jo Cornelissen work?"})
+print(cypher)
