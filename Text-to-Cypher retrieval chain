@@ -1,0 +1,14 @@
+qa_prompt = ChatPromptTemplate.from_messages([
+    SystemMessagePromptTemplate.from_template(QA_PROMPT),
+    HumanMessagePromptTemplate.from_template("Question: {question}")
+])
+
+qa_chain = {
+  	# Use output of text_to_cypher to get database results
+    "context": text_to_cypher_chain | RunnableLambda(lambda cypher: graph.query(cypher)),
+    # Pass the user input through to the "question" variable
+    "question": RunnablePassthrough()
+} | qa_prompt | llm | StrOutputParser()
+
+res = qa_chain.invoke({"question": "What companies is Harrison Chase connected to?"})
+print(res)
