@@ -1,0 +1,23 @@
+graph_document = GraphDocument(nodes=[scene], relationships=[])
+characters = {}
+
+for i, line in enumerate(lines[20:40]): 
+    character, text = get_character_and_line(line)
+
+    line_node = Node(type="Line", id=f"{scene.id}-line-{i}", properties={"raw": line,"character": character, "text": text, "caption": f"{text[:15]}..."})
+
+    if character not in characters:
+        character_node = Node(type="Character", id=character, properties={"name": character})
+        characters[character] = character_node
+        graph_document.nodes.append(character_node)
+
+    # Add nodes to the array
+    graph_document.nodes.append(line_node)
+
+    # Add relationship to the array
+    graph_document.relationships.extend(
+        [Relationship(source=scene, target=line_node, type="HAS_LINE"),
+        Relationship(source=line_node, target=characters[character], type="SPOKEN_BY")]
+    )
+
+visualize_graph(graph_document)
