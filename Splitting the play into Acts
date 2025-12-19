@@ -1,0 +1,16 @@
+act_splitter = RecursiveCharacterTextSplitter(
+  separators=[ 
+    r"\n\nTHE PROLOGUE.",
+    r"\n\n\*\*\* END",
+    # Split by the word ACT preceded by two newlines
+    r"\n\nACT"
+  ],
+  # Configure the patterns as regular expressions
+  is_separator_regex=True
+)
+
+# Split the play using act_splitter
+acts = act_splitter.split_text(romeo_and_juliet)
+
+for act in acts:
+  print(act.strip().split("\n")[0])
