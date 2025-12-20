@@ -1,0 +1,19 @@
+acts = act_splitter.split_text(romeo_and_juliet)
+
+for i, act in enumerate(acts):
+	lines = act.strip().split("\n")
+  
+	# Only include text relating to an act
+	if lines[0].startswith("ACT"):
+		print(i, act.strip().split("\n")[0])
+    
+		# Create an Act node
+		act_node = Node(type="Act", id=lines[0], properties={"title": lines[0]})
+		graph_document.nodes.append(act_node)
+
+		# Create the HAS_ACT relationship
+		graph_document.relationships.append(
+			Relationship(source=play_node, target=act_node, type="HAS_ACT", properties={"order": i})
+		)
+
+visualize_graph(graph_document)
