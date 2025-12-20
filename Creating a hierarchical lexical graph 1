@@ -1,0 +1,8 @@
+acts = act_splitter.split_text(romeo_and_juliet)
+
+for i, act in enumerate(acts):
+	lines = act.strip().split("\n")
+	
+	# Only include text relating to an act
+	if lines[0].startswith("ACT"):
+		print(i, act.strip().split("\n")[0])
