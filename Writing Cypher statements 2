@@ -1,0 +1,4 @@
+cypher = """
+MATCH (n:Person)-[:WORKS_FOR]->(c:Company)
+RETURN *
+"""
