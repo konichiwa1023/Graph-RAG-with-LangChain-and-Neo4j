@@ -1,0 +1,5 @@
+cypher = """
+MATCH (n:Person)-[:WORKS_FOR]->(c:Company)
+WHERE n.name = $name
+RETURN n.name AS person, c.name AS company
+"""
