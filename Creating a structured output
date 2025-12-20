@@ -1,0 +1,9 @@
+from pydantic import BaseModel, Field
+from typing import Optional
+
+# Inherit the correct pydantic class
+class Character(BaseModel):
+	# Describe the name property
+	name: str = Field("The full name of the character")                
+	# Set family to optional
+	family: Optional[str] = Field("The name of the family they belong to")
