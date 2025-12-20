@@ -1,0 +1,4 @@
+cypher = """
+MATCH (n:Person)
+RETURN *
+"""
