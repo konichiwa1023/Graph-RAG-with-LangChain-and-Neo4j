@@ -1,0 +1,11 @@
+class Character(BaseModel):
+    id: str = Field(
+        "A unique identifier consisting of the Character's given name and their family name in slug case.", 
+        examples=["romeo-montague", "lady-capulet"]  # Make sure to use the correct keyword here
+    )
+    name: str = Field("The name of the character")
+
+chain = prompt | llm.with_structured_output(Character)
+
+chain.invoke({"text": """JULIET.
+O Romeo, Romeo, wherefore art thou Romeo? Deny thy father and refuse thy name. Or if thou wilt not, be but sworn my love, And I’ll no longer be a Capulet."""})
