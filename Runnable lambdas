@@ -1,0 +1,9 @@
+def reverse(input):
+    return input[::-1]
+
+# Convert reverse() into a runnable
+reverse_chain = RunnableLambda(reverse)
+
+# Reverse the input
+output = reverse_chain.invoke("Hello, world!")
+print(output)
