@@ -1,0 +1,14 @@
+  class Line(BaseModel):
+    text: str = Field(..., description="The text of the line")
+    spoken_by: Character = Field(..., description="The character who speaks the line")
+    spoken_to: Optional[list[Character]] = Field(None, description="The character who the line is spoken to")
+
+class LineOutput(BaseModel):
+    # Request more than one line from the text
+    lines: list[Line] = Field(..., description="The lines from the text")
+
+# Return an instance of LineOutput
+structured_llm = llm.with_structured_output(LineOutput)
+
+for line in structured_llm.invoke(prompt.format_messages(text=text)):
+	print(line)
