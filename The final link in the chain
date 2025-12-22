@@ -1,0 +1,10 @@
+graphrag_qa_chain = RunnablePassthrough.assign(
+    # Pass the "question" key to the retriever
+    vectors = RunnableLambda(lambda x: line_retriever.invoke(x["question"])),
+    # Execute the generated Cypher statement
+    records = text_to_cypher_chain | graph.query
+) | graphrag_qa_prompt | llm | StrOutputParser()
+
+# Execute the hybrid chain
+output = graphrag_qa_chain.invoke({"question": "Does Sampson bite his thumb at Gregory?"})
+print(output)
