@@ -1,0 +1,16 @@
+# Extract characters from the personae variable
+output = character_chain.invoke({"personae": personae})
+character_json = dumps([dict(character) for character in output.characters])
+
+# Extract the relationships
+for character_name in ["Romeo", "Juliet", "Friar Lawrence"]:
+    relationship_output = relationship_chain.invoke({
+        "character_name": character_name, 
+        "personae": personae, 
+        "characters": character_json
+    })
+    
+    for relationship in relationship_output.relationships:
+        all_relationships.append(relationship)
+
+visualize_families(all_relationships, output)
