@@ -1,0 +1,8 @@
+
+# Add an output key to the chain
+chain = RunnablePassthrough.assign(
+    output=lambda x: x["input"] * 2
+)
+
+output = chain.invoke({"input": 2})
+print(output)
