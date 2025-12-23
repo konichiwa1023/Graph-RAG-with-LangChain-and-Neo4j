@@ -1,0 +1,6 @@
+# Query the graph with similarity_cypher
+result = graph.query(similarity_cypher)
+
+# Extract and print the results
+for row in result:
+    print(row['bId'], 'from', row['bFamily'], 'has similarity score of ', row['score'])
