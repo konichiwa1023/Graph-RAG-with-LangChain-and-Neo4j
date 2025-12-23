@@ -1,0 +1,7 @@
+# Evaluate the retrieval
+cypher_scores = evaluate(
+	dataset=cypher_dataset,
+	metrics=metrics,
+)
+
+print(cypher_scores)
