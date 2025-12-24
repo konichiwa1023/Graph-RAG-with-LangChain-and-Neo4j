@@ -1,0 +1,23 @@
+# Define the ConversationFact with the correct fields
+class ConversationFact(BaseModel):
+    """
+    A class that holds the facts from a conversation in a format of object, subject, predicate.
+
+    For example, if the conversation includes the fact that the user likes ice creamthe facts would be:
+    - object: "Adam"
+    - subject: "ice cream"
+    - relationship: "LIKES"
+    The class also includes a session ID to identify the conversation.
+    """
+    session_id: str = Field(description="The session ID of the conversation.")
+    object: str = Field(description="The object of the fact. For example, 'Adam' ")
+    subject: str = Field(description="The subject of the fact. For example, 'Ice cream'")
+    relationship: str = Field(description="The relationship between the object and the subject.  This should be a single word verb in upper case. For example, 'LIKES' or 'OWNS'")
+
+# Define a ConversationFacts class for creating lists of ConversationFact objects
+class ConversationFacts(BaseModel):
+    """A class that holds a list of ConversationFact objects."""
+    facts: list[ConversationFact] = Field(description="A list of ConversationFact objects.")
+
+# Bind the output to the llm provided
+llm_with_output = llm.with_structured_output(ConversationFacts)
