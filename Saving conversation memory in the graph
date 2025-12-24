@@ -1,0 +1,13 @@
+from langchain_neo4j import Neo4jChatMessageHistory
+
+# Store chat history in Neo4j
+history = Neo4jChatMessageHistory(
+    url=NEO4J_URL,
+    username=NEO4J_USERNAME,
+    password=NEO4J_PASSWORD,
+    session_id=SESSION_ID,
+)
+# Add a user message
+history.add_user_message("My favourite character is Juliet.")
+
+history.add_ai_message("Great choice! Juliet is a multi-faceted and complex character.")
