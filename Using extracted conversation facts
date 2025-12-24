@@ -1,0 +1,13 @@
+chain = ChatPromptTemplate.from_messages([
+    SystemMessagePromptTemplate.from_template("""
+    	You are talking to {user}, the user of the application. 
+        Any facts in the first person relate to {user}.
+        The Session ID is {session_id}.
+    	Extract the facts from the conversation and return them in the format of object, subject, predicate.
+    """),
+    # Pipe the chat prompt template into the LLM with structured output
+    MessagesPlaceholder(variable_name="history")
+]) | llm_with_output
+
+# Invoke the chain, passing it the messages from the history
+chain.invoke({"user": USER, "session_id": SESSION_ID, "history": history.messages})
