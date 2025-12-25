@@ -1,0 +1,13 @@
+# Create an evaluation LLM
+evaluator_llm = LangchainLLMWrapper(llm)
+
+metrics = [
+    # Evaluate LLM context without a reference
+    LLMContextPrecisionWithoutReference(llm=evaluator_llm),
+
+    # Evaluate the noise included
+   NoiseSensitivity(
+    llm=evaluator_llm, 
+    mode="irrelevant"
+)
+]
